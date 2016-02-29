@@ -79,10 +79,13 @@ OAuth.prototype.authorize = function(request, token) {
         oauth_signature_method: this.signature_method,
         oauth_timestamp: this.getTimeStamp(),
         oauth_version: this.version,
-        x_auth_username: this.x_auth_username,
-        x_auth_mode: this.x_auth_mode,
-        x_auth_password: this.x_auth_password,
     };
+
+    if (this.x_auth_mode && this.x_auth_username && this.x_auth_password) {
+        oauth_data.x_auth_username = this.x_auth_username
+        oauth_data.x_auth_mode = this.x_auth_mode
+        oauth_data.x_auth_password = this.x_auth_mode
+    }
 
     if(!token) {
         token = {};
