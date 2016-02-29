@@ -265,7 +265,7 @@ OAuth.prototype.toHeader = function(oauth_data) {
     var header_value = 'OAuth ';
 
     for(var key in oauth_data) {
-        if (key.indexOf('oauth_') === -1)
+        if (key.indexOf('oauth_') === -1 && key.indexOf('x_auth_') === -1)
             continue;
         header_value += this.percentEncode(key) + '="' + this.percentEncode(oauth_data[key]) + '"' + this.parameter_seperator;
     }
