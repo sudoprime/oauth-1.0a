@@ -25,6 +25,9 @@ function OAuth(opts) {
     this.nonce_length        = opts.nonce_length || 32;
     this.version             = opts.version || '1.0';
     this.parameter_seperator = opts.parameter_seperator || ', ';
+    this.x_auth_mode         = opts.x_auth_mode
+    this.x_auth_username     = opts.x_auth_username
+    this.x_auth_password     = opts.x_auth_password
 
     if(typeof opts.last_ampersand === 'undefined') {
         this.last_ampersand = true;
@@ -75,7 +78,10 @@ OAuth.prototype.authorize = function(request, token) {
         oauth_nonce: this.getNonce(),
         oauth_signature_method: this.signature_method,
         oauth_timestamp: this.getTimeStamp(),
-        oauth_version: this.version
+        oauth_version: this.version,
+        x_auth_username: this.x_auth_username,
+        x_auth_mode: this.x_auth_mode,
+        x_auth_password: this.x_auth_password,
     };
 
     if(!token) {
